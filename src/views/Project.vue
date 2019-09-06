@@ -4,7 +4,7 @@
             <v-row>
             <!--{{ id }}-->
                 <v-col cols="6">
-                    <v-img min-width="650" min-height="350" max-width="700" max-height="400" :src="card.src"></v-img>
+                    <v-img :src="card.src"></v-img>
                     <br>
                     <v-row justify="center">
                         <v-col cols="2">
@@ -15,6 +15,24 @@
 
                 <v-col style="text-align: center;" cols="6">
                     <h1 id="tit">{{ card.title }}</h1>
+                    <br><br><br>
+                    <v-col>
+                        <v-progress-linear color="green" height="15" rounded="true" :value="card.por"></v-progress-linear>
+                    </v-col>
+                    <v-col style="text-align: left;">
+                        <h1>R${{ card.at }} doados</h1>
+                        <span>comprometida com a meta de R${{ card.tot }}</span><br><br>
+                    </v-col>
+                    <v-row>
+                        <v-col cols="6">
+                            <h1>{{ card.at }}</h1>
+                            <span>doadores</span>
+                        </v-col>
+                        <v-col cols="6">
+                            <h1>{{ card.at }}</h1>
+                            <span>dias restantes</span>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-container>
@@ -36,8 +54,10 @@ export default {
         return {
             card: {
                 title: '',
-                src: ''
-            }
+                src: '',
+                at: 0,
+                tot: 0,
+            },
         }
     },
     props: {
@@ -50,6 +70,9 @@ export default {
             if (this.cards[i].id == parseInt(this.id)) {
                 this.card.title = this.cards[i].title
                 this.card.src = this.cards[i].src
+                this.card.at = this.cards[i].at
+                this.card.tot = this.cards[i].tot
+                this.card.por = this.cards[i].por
             }
         }
     },
