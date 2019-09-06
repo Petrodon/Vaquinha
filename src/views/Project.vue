@@ -25,11 +25,11 @@
                     </v-col>
                     <v-row>
                         <v-col cols="6">
-                            <h1>{{ card.at }}</h1>
+                            <h1>{{ card.tdoa }}</h1>
                             <span>doadores</span>
                         </v-col>
                         <v-col cols="6">
-                            <h1>{{ card.at }}</h1>
+                            <h1>{{ card.term }}</h1>
                             <span>dias restantes</span>
                         </v-col>
                     </v-row>
@@ -57,6 +57,8 @@ export default {
                 src: '',
                 at: 0,
                 tot: 0,
+                term: 0,
+                tdoa: 0
             },
         }
     },
@@ -66,15 +68,7 @@ export default {
         }
     },
     created: function () {
-        for (var i = 0; i < this.cards.length; i++) {
-            if (this.cards[i].id == parseInt(this.id)) {
-                this.card.title = this.cards[i].title
-                this.card.src = this.cards[i].src
-                this.card.at = this.cards[i].at
-                this.card.tot = this.cards[i].tot
-                this.card.por = this.cards[i].por
-            }
-        }
+        this.card = this.cards[parseInt(this.id)]
     },
     methods: {
         ...mapMutations({
