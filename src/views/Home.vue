@@ -15,7 +15,7 @@
     <v-container mt-7 text-center id="projetos">
         <h1 id="tit">Projetos</h1>
         <v-row>
-            <v-col cols="4" v-for="card in cards" :key="card.title">
+            <v-col cols="4" :key="card.title">
                 <v-card>
                     <v-img
                     :src="card.src"
