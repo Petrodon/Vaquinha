@@ -2,9 +2,22 @@
     <v-app>
         <v-container>
             <v-row>
-            <!--{{ id }}-->
                 <v-col cols="6">
                     <v-img :src="card.src"></v-img>
+                    <v-row justify="end">
+                        <v-col cols="3">
+                            <v-avatar size="25">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/compass.png">
+                            </v-avatar>
+                            {{ card.tags.tipo }}
+                        </v-col>
+                        <v-col cols="4">
+                            <v-avatar size="25">
+                                <img src="https://img.icons8.com/material/24/000000/marker--v1.png">
+                            </v-avatar>
+                            {{ card.tags.local }}
+                        </v-col>
+                    </v-row>
                     <br>
                     <v-row justify="center">
                         <v-col cols="2">
@@ -17,7 +30,7 @@
                     <h1 id="tit">{{ card.title }}</h1>
                     <br><br><br>
                     <v-col>
-                        <v-progress-linear color="green" height="15" rounded="true" :value="card.por"></v-progress-linear>
+                        <v-progress-linear color="green" height="15" :value="card.por"></v-progress-linear>
                     </v-col>
                     <v-col style="text-align: left;">
                         <h1>R${{ card.at }} doados</h1>
@@ -186,7 +199,8 @@ export default {
                 tot: 0,
                 term: 0,
                 tdoa: 0,
-                plans: []
+                plans: [],
+                tags: {}
             },
         }
     },
