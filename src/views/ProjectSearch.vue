@@ -10,6 +10,9 @@
                         v-model="inpv"
                     ></v-text-field>
                 </v-col>
+                <v-col cols="12">
+                    <v-btn @click="procurar()">Pesquisar</v-btn>
+                </v-col>
             </v-row>
 
             <v-row>
@@ -66,14 +69,15 @@ export default {
             cards: state => state.cards
         })
     },
-    created: function () {
-        alert(this.cards[i].title.indexOf(this.inpv))
-        for (var i=0; i <= this.cards.lenght; i++) {
-            if (this.cards[i].title.indexOf(this.inpv) != -1) {
-                this.pcards.push(this.cards[i])
+    methods: {
+        procurar () {
+            this.pcards = []
+            for (var i=0; i < this.cards.length; i++) {
+                if (this.cards[i].title.toLowerCase().indexOf(this.inpv) != -1) {
+                    this.pcards.push(this.cards[i])
+                }
             }
         }
-        alert(this.pcards[0].title)
     },
 }
 </script>
