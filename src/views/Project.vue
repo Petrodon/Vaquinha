@@ -21,7 +21,28 @@
                     <br>
                     <v-row justify="center">
                         <v-col cols="2">
-                            <v-btn id="don" min-width="100" min-height="60" color="success">Doar</v-btn>
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_xclick" />
+
+                                <!--Vendedor e URL de retorno, cancelamento e notificação-->
+                                <input type="hidden" name="business" value="vendedor@loja.com.br" />
+                                <input type="hidden" name="return" value="http://loja.com.br/retorno" />
+                                <input type="hidden" name="cancel" value="http://loja.com.br/cancelamento" />
+                                <input type="hidden" name="notify_url" value="http://loja.com.br/notificacao" />
+                            
+                                <!--Internacionalização e localização da página de pagamento-->
+                                <input type="hidden" name="charset" value="utf-8" />
+                                <input type="hidden" name="lc" value="BR" />
+                                <input type="hidden" name="country_code" value="BR" />
+                                <input type="hidden" name="currency_code" value="BRL" />
+                            
+                                <!--Informações sobre o produto e seu valor-->
+                                <input type="hidden" name="amount" :value="card.ve" />
+                                <input type="hidden" name="item_name" value="Servico" />
+                                <input type="hidden" name="quantity" value="1" />
+
+                                <v-btn type="submit" id="don" min-width="100" min-height="60" color="success">Doar</v-btn>
+                            </form>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -168,12 +189,22 @@
                                         absolute
                                         color="#F3B61F"
                                     >
-                                        <v-btn>Selecionar esse plano</v-btn>
+                                        <v-btn @click="card.ve = plan.val; snackbar = true">Selecionar esse plano</v-btn>
                                     </v-overlay>
                                 </v-fade-transition>
                             </v-card>
                         </template>
                     </v-hover>
+                    <v-snackbar v-model="snackbar">
+                        Plano escolhido
+                        <v-btn
+                            color="blue"
+                            text
+                            @click="snackbar = false"
+                        >
+                            Close
+                        </v-btn>
+                    </v-snackbar>
                     </v-col>
                 </v-col>
             </v-row>
@@ -192,16 +223,8 @@ export default {
     },
     data: () => {
         return {
-            card: {
-                title: '',
-                src: '',
-                at: 0,
-                tot: 0,
-                term: 0,
-                tdoa: 0,
-                plans: [],
-                tags: {}
-            },
+            snackbar: false,
+            card: {},
         }
     },
     props: {
