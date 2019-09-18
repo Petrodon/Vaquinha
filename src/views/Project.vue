@@ -35,7 +35,7 @@
                                 <input type="hidden" name="lc" value="BR" />
                                 <input type="hidden" name="country_code" value="BR" />
                                 <input type="hidden" name="currency_code" value="BRL" />
-                            
+
                                 <!--Informações sobre o produto e seu valor-->
                                 <input type="hidden" name="amount" :value="card.ve" />
                                 <input type="hidden" name="item_name" value="Doação" />
@@ -214,13 +214,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import axios from 'axios'
 
 export default {
-    computed: {
-        ... mapState({
-            cards: state => state.cards
-        })
-    },
     data: () => {
         return {
             snackbar: false,
@@ -232,14 +228,9 @@ export default {
             type: String,
         }
     },
-    created: function () {
-        this.card = this.cards[parseInt(this.id)]
+    mounted () {
+        axios.get('http://localhost:3000/api/' + this.id).then(response => (this.card = response.data))
     },
-    methods: {
-        ...mapMutations({
-            add: 'add'
-        }),
-  }
 }
 </script>
 

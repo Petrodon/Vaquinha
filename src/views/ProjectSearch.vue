@@ -55,19 +55,19 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
     data: () => {
         return {
             inpv: '',
             pcards: [],
+            cards: [],
             card: {}
         }
     },
-    computed: {
-        ... mapState({
-            cards: state => state.cards
-        })
+    mounted () {
+        axios.get('http://localhost:3000/api').then(response => (this.cards = response.data))
     },
     methods: {
         procurar () {

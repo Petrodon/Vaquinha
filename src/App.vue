@@ -16,9 +16,6 @@ export default {
   components: {
     Menu
   },
-  data: () => ({
-    //
-  }),
 };
 </script>
 

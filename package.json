@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://localhost:3000/api",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,6 +10,8 @@
   "dependencies": {
     "@mdi/js": "^4.2.95",
     "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",

@@ -28,11 +28,6 @@ export default new Router({
             component: SignIn
         },
         {
-            path: '/about',
-            name: 'about',
-            component: ProjectSearch
-        },
-        {
             path: '/project',
             name: 'project',
             component: ProjectSearch

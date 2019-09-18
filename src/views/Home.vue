@@ -13,6 +13,7 @@
     </v-img>
 
     <v-container mt-7 text-center id="projetos">
+        {{info}}
         <h1 id="tit">Projetos</h1>
         <v-row>
             <v-col cols="4" v-for="card in cards" :key="card.title">
@@ -58,18 +59,18 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
     data: () => {
         return {
+            cards: [],
             card: {}
         }
     },
-    computed: {
-        ... mapState({
-            cards: state => state.cards
-        })
-    },
+    mounted () {
+        axios.get('http://localhost:3000/api').then(response => (this.cards = response.data))
+    }
 }
 </script>
 
