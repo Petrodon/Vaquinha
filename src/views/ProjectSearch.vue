@@ -66,8 +66,9 @@ export default {
             card: {}
         }
     },
-    mounted () {
-        axios.get('http://localhost:3000/api').then(response => (this.cards = response.data))
+    mounted: async function () {
+        const projects = await api.get("/projects")
+        this.cards = projects.data.docs
     },
     methods: {
         procurar () {

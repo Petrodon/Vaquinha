@@ -18,3 +18,19 @@
     color: white;
   }
 </style>
+
+<script>
+import { mapGetters, mapMutations } from "vuex"
+
+export default {
+  computed: {
+    ...mapGetters(["getIsLogged"]),
+    ...mapMutations(["LOGOFF"])
+  },
+  methods: {
+    logoff: function() {
+      this.LOGOFF;
+    }
+  }
+}
+</script>

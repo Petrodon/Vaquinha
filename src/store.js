@@ -7,7 +7,7 @@ export default new Vuex.Store({
     state: {
         idUser: '',
         tokenUser: '',
-        cards: []
+        isLogged: false
         /*cards: [
             //No term deverá ser registrado quando que o projeto foi colocado para pedir ajuda e pegar 
             //a hora na página do projeto para calcular o tempo para terminar
@@ -16,10 +16,42 @@ export default new Vuex.Store({
             { id: 2, ve: 10, tdoa: 70, term: 20, tot: 50, por: 10, at: 5, payinfo: {email: 'palh@ajuda12345.com', return: '', cancel: '', notify: ''}, title: 'Ajude um brasileiro ir para Harvard', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Harvard_University_Widener_Library.jpg/800px-Harvard_University_Widener_Library.jpg', plans: [{id: 0, title: 'Standard', desc: 'Sincera gratidão', val: 5}, {id: 1, title: 'Premium', desc: 'Standard + camiseta', val: 15}], tags: { tipo: 'Educacional', local: 'Porto Alegre - SC' } },
         ],*/
     },
-    mutations: {
 
+    getters: {
+        getIsLogged: state => {
+            return state.isLogged;
+        },
+
+        getDetailsUser: state => {
+            return state.detailsUser;
+        },
+
+        getTokenUser: state => {
+            return state.tokenUser;
+        },
+
+        getIdUser: state => {
+            return state.idUser
+        }
     },
-    actions: {
 
-    }
+    mutations: {
+        SAVE_LOGIN: (state, data) => {
+            state.idUser = data.user._id;
+            state.tokenUser = data.token;
+            state.detailsUser = {
+                email: data.user.email,
+                name: data.user.name,
+                image: data.user.image
+            };
+            state.isLogged = true;
+        },
+
+        LOGOFF: state => {
+            state.idUser = "";
+            state.tokenUser = "";
+            state.isLogged = false;
+        },
+    },
+    actions: {}
 })

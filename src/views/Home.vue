@@ -13,7 +13,6 @@
     </v-img>
 
     <v-container mt-7 text-center id="projetos">
-        {{info}}
         <h1 id="tit">Projetos</h1>
         <v-row>
             <v-col cols="4" v-for="card in cards" :key="card.title">
@@ -58,18 +57,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import axios from 'axios'
+import { mapGetters } from 'vuex'
+import api from "@/services/api"
 
 export default {
+    computed: {
+        ...mapGetters(["getTokenUser"])
+    },
     data: () => {
         return {
             cards: [],
             card: {}
         }
     },
-    mounted () {
-        axios.get('http://localhost:3000/api').then(response => (this.cards = response.data))
+    mounted: async function () {
+        const projects = await api.get("/projects")
+        this.cards = projects.data.docs
     }
 }
 </script>

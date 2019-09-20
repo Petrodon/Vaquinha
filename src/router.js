@@ -6,7 +6,8 @@ import SignUp from './views/SignUp.vue'
 import Home from './views/Home.vue'
 import ProjectSearch from './views/ProjectSearch.vue'
 import Project from './views/Project.vue'
-import Card from './views/Card.vue'
+import NewProject from "./views/NewProject.vue"
+import Perfil from "./views/Perfil.vue"
 
 
 Vue.use(Router)
@@ -28,6 +29,16 @@ export default new Router({
             component: SignIn
         },
         {
+            path: "/perfil",
+            name: "perfil",
+            component: Perfil
+        },
+        {
+            path: "/new",
+            name: "new",
+            component: NewProject
+        },
+        {
             path: '/project',
             name: 'project',
             component: ProjectSearch
@@ -36,11 +47,6 @@ export default new Router({
             path: '/project/:id',
             component: Project,
             props: true
-        },
-        {
-            path: '/card',
-            name: 'card',
-            component: Card
         }
     ]
 })
