@@ -31,15 +31,13 @@
                 </v-col>
 
                 <v-col cols="12">
-                  <v-text-field
-                    v-model="tags"
-                    label="HashTags"
-                    outlined
-                    required
-                    color="#F3B61F"
-                    rounded
-                  ></v-text-field>
+                  <v-combobox
+                    v-model="tags.tipo"
+                    :items="items"
+                    label="Selecione uma categoria para seu projeto e o seu local"
+                  ></v-combobox>
                 </v-col>
+
                 <v-col cols="12">
                   <v-file-input
                     v-model="images"
@@ -73,16 +71,18 @@ export default {
   },
 
   data: () => ({
+    items: ['Design e Arte', 'Tecnologia', 'Comida', 'Construção', 'Jogos', 'Social', 'Publicações'],
     id: 0,
-    doadores: 0,
-    DiaInit: 0,
     VAtual: 0,
-    title: 0,
-    description: 0,
-    plans: {},
-    payinfo: {},
-    tags: {},
+    VFinal: 0,
+    DiaInit: 0,
+    doadores: 0,
+    description: '',
+    title: '',
     creator: {},
+    payinfo: {email: '', return: '', cancel: '', notify: ''},
+    plans: [{id: 0, title: '', desc: '', val: 0}, {id: 1, title: '', desc: '', val: 0}],
+    tags: { tipo: '', local: '' },
     images: []
   }),
 
@@ -91,11 +91,19 @@ export default {
       return this.$router.push("/signin");
     }
   },
-  
+
   methods: {
     handleSubmit: async function() {
-      const { id, doadores, DiaInit, VAtual, title, description, plans, payinfo, tags, creator, images } = this;
+      const { id, doadores, DiaInit, VAtual, VFinal, title, description, plans, payinfo, tags, creator, images } = this;
       const data = new FormData();
+      data.append("id", id);
+      data.append("doadores", doadores);
+      data.append("DiaInit", DiaInit);
+      data.append("VAtual", VAtual);
+      data.append("VFinal", VFinal);
+      data.append("plans", plans);
+      data.append("payinfo", payinfo);
+      data.append("creator", creator);
       data.append("title", title);
       data.append("description", description);
       data.append("tags", tags);

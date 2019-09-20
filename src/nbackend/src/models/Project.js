@@ -17,6 +17,11 @@ const ProjectSchema = new mongoose.Schema({
         required: true
     },
 
+    VFinal: {
+        type: Number,
+        required: true
+    },
+
     VAtual: {
         type: Number,
         required: true
