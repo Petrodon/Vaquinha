@@ -13,12 +13,13 @@
     </v-img>
 
     <v-container mt-7 text-center id="projetos">
+        {{cont}}
         <h1 id="tit">Projetos</h1>
         <v-row>
             <v-col cols="4" v-for="card in cards" :key="card.title">
                 <v-card>
                     <v-img
-                    :src="card.src"
+                    :src="card.images[0]"
                     class="white--text"
                     height="200px"
                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
@@ -30,7 +31,7 @@
                     </v-img>
 
                     <v-card-actions>
-                    <v-btn :to="'/project/' + card.id" text>Ver Projeto</v-btn>
+                    <v-btn :to="'/project/' + card._id" text>Ver Projeto</v-btn>
                     <div class="flex-grow-1"></div>
 
                     <v-btn icon>
@@ -66,6 +67,7 @@ export default {
     },
     data: () => {
         return {
+            cont: [],
             cards: [],
             card: {}
         }

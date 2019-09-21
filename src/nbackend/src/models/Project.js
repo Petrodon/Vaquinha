@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
 const ProjectSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
 
     doadores: {
         type: Number,
@@ -44,17 +40,12 @@ const ProjectSchema = new mongoose.Schema({
     },
 
     images: {
-        type: [{ type: String }],
+        type: [{type: String}],
         required: true
     },
 
     plans: {
-        type: [{id: Number, title: String, desc: String, val: Number}],
-        required: true
-    },
-
-    payinfo: {
-        type: {email: String, return: String, cancel: String, notify: String},
+        type: [{title: String, desc: String, val: Number}],
         required: true
     },
 

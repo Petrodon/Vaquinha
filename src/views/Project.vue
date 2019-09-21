@@ -3,7 +3,7 @@
         <v-container>
             <v-row>
                 <v-col cols="6">
-                    <v-img :src="card.src"></v-img>
+                    <v-img :src="card.images[0]"></v-img>
                     <v-row justify="end">
                         <v-col cols="3">
                             <v-avatar size="25">
@@ -25,10 +25,10 @@
                                 <input type="hidden" name="cmd" value="_xclick" />
 
                                 <!--Vendedor e URL de retorno, cancelamento e notificação-->
-                                <input type="hidden" name="business" :value="card.payinfo.email" />
-                                <input type="hidden" name="return" :value="card.payinfo.return" />
-                                <input type="hidden" name="cancel" :value="card.payinfo.cancel" />
-                                <input type="hidden" name="notify_url" :value="card.payinfo.notify" />
+                                <input type="hidden" name="business" :value="card.creator.email" />
+                                <input type="hidden" name="return" :value="'http://localhost:8080/#/project/' + card._id" />
+                                <input type="hidden" name="cancel" value="" />
+                                <input type="hidden" name="notify_url" value="" />
                             
                                 <!--Internacionalização e localização da página de pagamento-->
                                 <input type="hidden" name="charset" value="utf-8" />
@@ -80,7 +80,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="4">
-                    <v-col v-bind:key="plan.id" v-for="plan in card.plans">
+                    <v-col v-bind:key="plan.val" v-for="plan in card.plans">
                     <v-hover>
                         <template v-slot:default="{ hover }">
                             <v-card>
@@ -136,8 +136,12 @@ export default {
     },
     mounted: function () {
         const projects = api.get("/projects")
-        this.card = projects.data.docs[this.id]
-        this.card.por = this.card.at/this.card.tot*100
+        for (var i=0; i<cards.length; i++) {
+            if (projects.data.docs[i]._id == this.id) {
+                this.card = projects.data.docs[i]
+                this.card.por = this.card.at/this.card.tot*100
+            }
+        }
     },
 }
 </script>

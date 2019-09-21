@@ -52,7 +52,6 @@ module.exports = {
 
             fs.unlinkSync(req.file.path);
             const project = await Project.create({
-                id,
                 doadores,
                 DiaInit,
                 VAtual,
@@ -60,7 +59,6 @@ module.exports = {
                 title,
                 description,
                 plans,
-                payinfo,
                 tags,
                 creator: req.userId,
                 images: fileName,
@@ -68,7 +66,6 @@ module.exports = {
             return res.status(201).json(project);
         } else {
             const project = await Project.create({
-                id,
                 doadores,
                 DiaInit,
                 VAtual,
@@ -76,7 +73,6 @@ module.exports = {
                 title,
                 description,
                 plans,
-                payinfo,
                 tags,
                 creator: req.userId,
                 images: fileName,
