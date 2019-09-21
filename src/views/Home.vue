@@ -13,7 +13,6 @@
     </v-img>
 
     <v-container mt-7 text-center id="projetos">
-        {{cont}}
         <h1 id="tit">Projetos</h1>
         <v-row>
             <v-col cols="4" v-for="card in cards" :key="card.title">
@@ -67,7 +66,6 @@ export default {
     },
     data: () => {
         return {
-            cont: [],
             cards: [],
             card: {}
         }
